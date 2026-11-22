@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>财经院校毕业去向分析 · 本科—研究生—就业链条</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="side">
+    <div class="brand">
+      <b>去向链条分析</b>
+      <span>五财一贸 ＋ 清北复交人<br>本科 · 研究生 · 就业</span>
+    </div>
+    <div class="grp">数据视图</div>
+    <button data-v="overview" class="on"><i>01</i>总览</button>
+    <button data-v="industry"><i>02</i>行业流向</button>
+    <button data-v="path"><i>03</i>本科去向</button>
+    <button data-v="grad"><i>04</i>研究生结构</button>
+    <button data-v="school"><i>05</i>院校对照</button>
+    <button data-v="ai"><i>06</i>AI 冲击</button>
+    <button data-v="method"><i>07</i>口径与证据</button>
+  </aside>
+
+  <main class="main">
+
+    <!-- ========== 01 总览 ========== -->
+    <section class="view on" id="v-overview">
+      <div class="head">
+        <div class="eb">Overview</div>
+        <h1>财经专业的三条去向链，正在同时变形</h1>
+        <p>数据来自《2026 年中国本科生就业报告》（2025 届毕业生，麦可思就业蓝皮书）与 11 所院校
+          2027 年研究生招生章程原文。左边是市场的信号，右边是培养端的分层。</p>
+      </div>
+      <div class="kpis" id="kpiBox"></div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>金融业的五年轨迹</h2>
+          <p class="note">本科毕业生进入金融业的比例，<b>2024 届 7.6% → 2025 届 6.6%</b></p>
+          <div id="chFin"></div>
+        </div>
+        <div class="panel">
+          <h2>会计职业的比例在收缩</h2>
+          <p class="note">从事会计职业的本科毕业生比例，<b>2021 届 3.7% → 2025 届 3.2%</b></p>
+          <div id="chAcc"></div>
+        </div>
+      </div>
+
+      <div class="take">
+        <h3>三条结论</h3>
+        <p><b>一、出口端在收窄。</b>金融业占比一年掉了 1.0 个百分点，是近五年最大单年降幅；
+           会计职业从 3.7% 降到 3.2%。这不是周期波动，是岗位结构在被 AI 与业务模式一起压缩。</p>
+        <p><b>二、入口端在分层。</b>最好的几所院校把学术硕士通道收窄甚至关闭——清华五道口、北大光华
+           只剩「专硕 + 博士」；贸大金融学 020204 已并入硕博连读；人大统考目录里查不到 020204。
+           想读金融学硕，在头部院校基本只剩推免与直博。</p>
+        <p><b>三、学制不是常识。</b>上交安泰学硕 2.5 年、贸大全校硕士 2 年、央财会计专硕 3 年、
+           中南财专硕 2 或 3 年——「学硕 3 年专硕 2 年」这句话在至少四所学校不成立。</p>
+      </div>
+    </section>
+
+    <!-- ========== 02 行业流向 ========== -->
+    <section class="view" id="v-industry">
+      <div class="head">
+        <div class="eb">Industry Flow</div>
+        <h1>行业流向：谁在涨，谁在退</h1>
+        <p>2021—2025 届本科毕业生就业行业类分布（单位 %）。这是判断「财经专业还有没有出口」最直接的一张表。</p>
+      </div>
+
+      <div class="panel">
+        <h2>五年趋势（点选行业可高亮）</h2>
+        <p class="note">共 12 个行业类。<b>金融业</b>与<b>建筑业</b>用粗线标出——前者是财经专业的主出口，后者是降幅最大的行业。</p>
+        <div id="chLine"></div>
+        <div class="legend" id="lgLine"></div>
+      </div>
+
+      <div class="panel">
+        <h2>2025 届占比与五年变化</h2>
+        <p class="note">条形长度＝2025 届就业占比；右侧数字＝相对 2021 届的变化（百分点）。</p>
+        <div id="chBar"></div>
+      </div>
+
+      <div class="take warn">
+        <h3>这张表最该注意的两行</h3>
+        <p><b>金融业：</b>2021 届 7.2% → 2024 届 7.6% → 2025 届 6.6%。前四年缓慢上行，2025 届突然掉 1.0pct，
+           五年净变化 -0.6pct。这是「先升后降」的拐点，不是持续下滑。</p>
+        <p><b>建筑业：</b>8.6% → 5.0%，五年 -3.6pct，是全部行业中降幅最大的。房地产开发及租赁业
+           同期从 1.4% 降到 0.6%。这条线对财经专业的影响是间接但真实的——地产系的融资、财务岗随之收缩。</p>
+      </div>
+    </section>
+
+    <!-- ========== 03 本科去向 ========== -->
+    <section class="view" id="v-path">
+      <div class="head">
+        <div class="eb">Undergraduate Path</div>
+        <h1>本科生毕业去向：先分流，再落地</h1>
+        <p>2025 届毕业半年后落实率 85.1%，2020 届毕业五年后升到 95.6%——说明就业匹配不是毕业那一刻完成的。</p>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>落实率的两个时点</h2>
+          <p class="note">同一批人（2020 届）在毕业半年后与五年后的差距</p>
+          <div id="chFlow"></div>
+          <div class="legend">
+            <span><i style="background:#c9d9d5"></i>毕业半年后 89.0%</span>
+            <span><i style="background:#0f7a66"></i>毕业五年后 95.6%</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>学科门类：五年后 vs 半年后</h2>
+          <p class="note"><b>经济学 87.6% → 95.6%</b>，<b>管理学 90.4% → 95.0%</b>。财经类学科的「慢热」特征明显。</p>
+          <div id="chSubj"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>去向结构的关键变化</h2>
+        <div class="kpis" style="margin:0">
+          <div class="kpi"><div class="n">6.9<small>%</small></div><div class="l">灵活就业比例</div><div class="d">较 2021 届 +2.7pct</div></div>
+          <div class="kpi gold"><div class="n">6331<small>元</small></div><div class="l">自主创业月收入</div><div class="d">满意度 88%，高于平均 81%</div></div>
+          <div class="kpi blue"><div class="n">63<small>%</small></div><div class="l">在地级及以下城市就业</div><div class="d">重心持续下沉</div></div>
+          <div class="kpi"><div class="n">3.0<small>%</small></div><div class="l">五年后自主创业比例</div><div class="d">半年后仅 1.3%</div></div>
+        </div>
+      </div>
+
+      <div class="take">
+        <h3>为什么「毕业即就业」是个错误预期</h3>
+        <p>2025 届半年后落实率 85.1%，意味着约七分之一的人在毕业半年时仍在求职或备考。
+           但同一批 2020 届五年后达到 95.6%——<b>中间那 6.6 个百分点，是靠升学、岗位转换和二次择业补上的</b>。</p>
+        <p>对个人的含义：毕业时的「未落实」不等于失败，但也不等于可以拖。五年后能补上的前提，是这五年里
+           完成了学历提升或能力跃迁；如果只是空转，五年后的数字不会自动变好。</p>
+      </div>
+    </section>
+
+    <!-- ========== 04 研究生结构 ========== -->
+    <section class="view" id="v-grad">
+      <div class="head">
+        <div class="eb">Graduate Structure</div>
+        <h1>研究生怎么分：四个维度，不是两个格子</h1>
+        <p>以中央财经大学 2027 年招生目录的 66 条档案为样本。只看「学硕 / 专硕」会漏掉一半信息。</p>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>学位类型</h2>
+          <p class="note">66 条档案：学术 41 / 专业 24 / 硕博连读 1</p>
+          <div id="chDeg"></div>
+        </div>
+        <div class="panel">
+          <h2>学制分布</h2>
+          <p class="note">2 年 34 条、3 年 31 条、5 年 1 条</p>
+          <div id="chYr"></div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>2027 年招生规模</h2>
+          <p class="note">全日制 1825 人 / 非全日制 1000 人</p>
+          <div id="chPlan"></div>
+          <div class="take warn" style="margin:12px 0 0">
+            <h3>条目数会骗人</h3>
+            <p>非全只有 8 个专业条目（占 12%），但招生 1000 人，<b>占总量 35.4%</b>。
+               原因是 MBA、MPA、会计非全单个专业招生量极大。按条目数算结构，会严重低估大专业的权重。</p>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>学费（元 / 年）</h2>
+          <p class="note">官网简章原文，三项对比</p>
+          <div id="chFee"></div>
+          <div class="take" style="margin:12px 0 0">
+            <h3>全日制会计专硕：统考只招 2 人</h3>
+            <p>推免 113 人，统考 2 人。这个数字在任何一个专业目录的汇总表里都看不到，
+               只写在学院自己的招生简章里。<b>选专业时最该查、最容易漏的就是它。</b></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>三条容易被忽略的规则</h2>
+        <table class="tb">
+          <thead><tr><th style="width:34%">规则</th><th>具体表现</th></tr></thead>
+          <tbody>
+            <tr><td>专硕不一定比学硕短</td><td>央财会计、审计专硕全日制 <b>3 年</b>；而企业管理、投资学、保险学学硕是 <b>2 年</b></td></tr>
+            <tr><td>推免专属通道</td><td>金融科技（05）、智能与计算金融（06）、会计 03「AI+会计」<b>仅接收推免生</b>，统考无门</td></tr>
+            <tr><td>非全只招在职定向</td><td>央财章程：非全日制硕士「仅招收在职定向就业人员」，应届生默认走全日制</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== 05 院校对照 ========== -->
+    <section class="view" id="v-school">
+      <div class="head">
+        <div class="eb">School Matrix</div>
+        <h1>十一所院校：哪些查证过，哪些还是空白</h1>
+        <p>全部条目逐个访问官网核对。绿色＝官网原文确认；橙色＝与原表不一致、已修正；
+           灰色＝未能获取。没查到的就留空，不猜。</p>
+      </div>
+
+      <div class="panel">
+        <div class="scroll"><table class="tb" id="schoolTable"></table></div>
+        <div class="legend">
+          <span><i style="background:#0f7a66"></i>官网原文确认</span>
+          <span><i style="background:#b8852f"></i>已修正（原判断有误）</span>
+          <span><i style="background:#c9c9c0"></i>未能获取</span>
+        </div>
+      </div>
+
+      <div class="take warn">
+        <h3>被官网推翻的三处</h3>
+        <p><b>清华五道口：</b>招生栏目只有「金融学博士 / 金融专业硕士 / 技术转移硕士 / 金融MBA / 金融EMBA」，
+           <b>没有学术型硕士</b>。想做学术直接读博。</p>
+        <p><b>北大光华：</b>硕士项目全是专硕（MFin、全球管理、公益管理、MPAcc、商业分析），<b>没有学术型金融学硕士</b>。</p>
+        <p><b>上海交大安泰：</b>「全日制科学学位硕士学习年限为<b>两年半</b>」，且按<b>一级学科</b>（应用经济学）招生，
+           不单设金融学硕士——「学硕 3 年」在这里不成立。</p>
+      </div>
+
+      <div class="take">
+        <h3>学术硕士通道正在三种方式下收窄</h3>
+        <table class="tb" style="margin-top:8px">
+          <thead><tr><th style="width:22%">方式</th><th style="width:26%">院校</th><th>表现</th></tr></thead>
+          <tbody>
+            <tr><td>直接取消</td><td>清华五道口、北大光华</td><td>只有专硕 + 博士，没有中间的学硕层</td></tr>
+            <tr><td>并入硕博连读</td><td>对外经贸</td><td>金融学 020204「不单设学术学位硕士招生」</td></tr>
+            <tr><td>只走推免</td><td>中国人民大学</td><td>2027 统考专业目录里查不到 020204</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px">而财经类院校（央财、上财、西财、中南财）仍保留完整学硕通道，只是名额越来越向推免倾斜。</p>
+      </div>
+    </section>
+
+    <!-- ========== 06 AI 冲击 ========== -->
+    <section class="view" id="v-ai">
+      <div class="head">
+        <div class="eb">AI Impact</div>
+        <h1>AI 没有消灭职业，先吃掉了入门级任务</h1>
+        <p>2025 届本科毕业生 91% 在工作中使用 AI。受影响最直接的两个职业，恰好是财经与计算机的入门岗。</p>
+      </div>
+
+      <div class="panel">
+        <h2>两个职业的四年变化</h2>
+        <p class="note">2021 届 → 2025 届，从事该职业的本科毕业生比例</p>
+        <div id="chAi"></div>
+        <div class="legend">
+          <span><i style="background:#c9d9d5"></i>2021 届</span>
+          <span><i style="background:#a8322c"></i>2025 届</span>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>会计学专业的能力短板</h2>
+          <p class="note">2025 届会计学专业毕业生，三项能力的满足度</p>
+          <div id="chSkill"></div>
+        </div>
+        <div class="panel">
+          <h2>四条原文判断</h2>
+          <ul id="aiList" style="margin:0;padding-left:18px;font-size:13px;line-height:2;color:#2a423c"></ul>
+        </div>
+      </div>
+
+      <div class="take warn">
+        <h3>对财经专业的直接含义</h3>
+        <p>报告的原话是：AI 影响「并非简单替代整个职业，而是优先压缩流程化、标准化、重复性强的入门级任务空间」。
+           会计职业从 3.7% 降到 3.2%，程序员从 1.9% 降到 1.0%——<b>不是这两个职业消失了，是入门岗位变少了</b>。</p>
+        <p>所以培养重心必须上移：从「会做账、会写代码」转向「能解释口径、能做分析判断、能设计流程并对结果负责」。
+           央财把「AI+会计」做成推免专属方向、西财设数字经济专硕，都是这个逻辑的产物。</p>
+      </div>
+    </section>
+
+    <!-- ========== 07 口径 ========== -->
+    <section class="view" id="v-method">
+      <div class="head">
+        <div class="eb">Method &amp; Evidence</div>
+        <h1>每个数字从哪里来</h1>
+        <p>这份分析只做一件事：把「可回查的」和「不确定的」分开。没有把握的条目留空，不做填充。</p>
+      </div>
+
+      <div class="panel">
+        <h2>数据来源</h2>
+        <div class="scroll"><table class="tb" id="srcTable"></table></div>
+      </div>
+
+      <div class="panel">
+        <h2>核对方法</h2>
+        <table class="tb">
+          <thead><tr><th style="width:26%">环节</th><th>做法</th></tr></thead>
+          <tbody>
+            <tr><td>院校官网访问</td><td>逐校定位研招网真实域名（多数不是 yjsy 前缀），覆盖 UA 后抓取 2027 年招生章程与专业目录</td></tr>
+            <tr><td>学制核对</td><td>优先取章程「学制与学习方式」章节原文；章程无此章节的，取学院招生简章或专业目录表格字段</td></tr>
+            <tr><td>结构统计</td><td>招生目录按「学位类型 × 学习形式 × 学制」三维交叉统计，同时用章程公布的招生人数校验条目数口径</td></tr>
+            <tr><td>标注规则</td><td>官网原文＝绿；与原判断冲突并已修正＝橙；无法获取＝灰。三种状态在表里同时可见</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2>三个已知缺口</h2>
+        <table class="tb">
+          <thead><tr><th style="width:26%">缺口</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>东北财学制</td><td>2027 章程为扫描件 PDF（64 页无文字层），本地无 OCR，未能读取。页面入口为 graduate.dufe.edu.cn</td></tr>
+            <tr><td>复旦 / 清北学制</td><td>官网只到项目结构层，学制字段在招生专业目录的更深层页面，本轮未取</td></tr>
+            <tr><td>分专业去向</td><td>就业报告按学科门类与行业披露，不按「某校某专业硕士」拆分，该层级数据公开渠道不存在</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="take">
+        <h3>使用建议</h3>
+        <p>把这份材料当作<b>「问题清单 + 已核实的锚点」</b>，而不是一份可以直接引用的统计表。
+           引用时请逐条看状态标记：带绿色的可以注明来源年份直接用；橙色的说明原判断已被推翻，请用新结论；
+           灰色的请先回官网确认再写进报告。</p>
+      </div>
+
+      <div class="foot">
+        <b>数据来源：</b>《2026 年中国本科生就业报告》（麦可思就业蓝皮书，社会科学文献出版社，2026 年 6 月第 1 版，基于 2025 届毕业生跟踪评价）；
+        中央财经大学 2027 年硕士研究生招生章程与招生专业目录；对外经济贸易大学、西南财经大学、中南财经政法大学、中国人民大学、
+        清华大学五道口金融学院、北京大学光华管理学院、上海交通大学安泰经济与管理学院、复旦大学经济学院、上海财经大学研究生院官网公开材料。
+        <br><b>说明：</b>本页为课程分析用途，不构成报考建议。就业比例为全国本科口径，不代表任一院校单校数据。
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
