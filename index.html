@@ -21,7 +21,7 @@
     <button data-v="majors"><i>04</i>专业版图</button>
     <button data-v="grad"><i>05</i>研究生结构</button>
     <button data-v="jobs"><i>06</i>岗位门槛</button>
-    <button data-v="routes"><i>07</i>八条路径</button>
+    <button data-v="routes"><i>07</i>十五条路径</button>
     <button data-v="school"><i>08</i>院校对照</button>
     <button data-v="ai"><i>09</i>AI 冲击</button>
     <button data-v="method"><i>10</i>口径与证据</button>
@@ -194,8 +194,8 @@
       <div class="head">
         <div class="eb">Graduate Structure</div>
         <h1>66 条招生档案：21 个培养单位，不止金融会计审计</h1>
-        <p>覆盖财政税务、金融、会计、商学、经济、管工、保险、政府管理、体育经济、国贸、统计数学、
-          信息、人工智能共 21 个培养单位。按「学位 × 形式 × 学制 × 方向」四个维度同时看。</p>
+        <p style="color:#a8611b;font-size:12.5px;margin:4px 0 0">⚠ 这 66 条仅来自中央财经大学 2027 年招生目录；其余 10 所的院系与项目在「08 院校对照」页。</p>
+        <p>覆盖财政税务、金融、会计、商学、经济、管工、保险、政府管理、体育经济、国贸、统计数学、信息、人工智能等 21 个培养单位。按「学位 × 形式 × 学制 × 方向」四个维度同时看。</p><p style="color:#a8611b;font-size:12.5px;margin-top:6px">⚠ 这 66 条仅来自中央财经大学 2027 年招生目录；其余 10 所的院系与项目见第 08 页「院校对照」。</p>
       </div>
 
       <div class="kpis" id="gradKpi"></div>
@@ -218,9 +218,13 @@
       </div>
 
       <div class="panel">
-        <h2>21 个培养单位的招生条数</h2>
-        <p class="note">条数反映项目厚度，<b>不等于招生人数</b>——金融学院 6 条覆盖 494 人，而体育经济与管理学院 1 条仅 5 人。</p>
+        <h2>21 个培养单位 × 学位类型 × 专业清单</h2>
+        <p class="note">条数反映项目厚度，<b>不等于招生人数</b>——金融学院 6 条覆盖 494 人，
+          而体育经济与管理学院 1 条仅 5 人。<b>同一培养单位下学硕与专硕的学制常不同，逐条看才准。</b></p>
         <div id="chDept"></div>
+        <div class="scroll" style="margin-top:16px;max-height:480px;overflow-y:auto">
+          <table class="tb" id="deptTb"></table>
+        </div>
       </div>
 
       <div class="grid2">
@@ -281,12 +285,12 @@
       </div>
     </section>
 
-    <!-- ===== 07 八条路径 ===== -->
+    <!-- ===== 07 十五条路径 ===== -->
     <section class="view" id="v-routes">
       <div class="head">
         <div class="eb">Three Routes</div>
-        <h1>八条完整路径：从本科专业推到具体岗位</h1>
-        <p>金融、会计审计、学术、财税、统计、保险、国贸、计算机——八条线，每条都能从大一推到大四，再推到第一份工作的时间点。</p>
+        <h1>十五条完整路径：45 个本科专业全部有出口</h1>
+        <p>金融、会计审计、学术、财税、统计、保险、国贸、计算机、泛商科、管工、法学、社会心理、传媒文创、外语、体育——十五条线覆盖 45 个本科专业，每条从大一推到大四，再推到第一份工作时间点。</p>
       </div>
       <div id="pathsBox"></div>
 
@@ -296,8 +300,8 @@
       </div>
 
       <div class="take">
-        <h3>八条线的分岔点都在同一个学期</h3>
-        <p>金融靠「保研排名或考研初试 + 实习」，会计靠「CPA + 四大寒假实习」，学术靠「助研 + 数理训练 + 保研」，财税靠「税法 + 税务师」，统计靠「Python/SQL + 建模竞赛」，计算机靠「408 或 Python + 项目经历」。
+        <h3>十五条线的分岔点都在同一个学期</h3>
+        <p>金融靠「保研排名或考研初试 + 实习」，会计靠「CPA + 四大寒假实习」，学术靠「助研 + 数理训练 + 保研」，财税靠「税法 + 税务师」，统计靠「Python/SQL + 建模竞赛」，计算机靠「408 或 Python + 项目经历」，法学靠「法考 + 法务实习」。
            三者的关键动作都压在大三下到大四上。<b>所以真正的选择不是大四做的，是大二下就开始的。</b></p>
       </div>
     </section>
