@@ -23,8 +23,10 @@
     <button data-v="jobs"><i>06</i>岗位门槛</button>
     <button data-v="routes"><i>07</i>十五条路径</button>
     <button data-v="school"><i>08</i>院校对照</button>
-    <button data-v="ai"><i>09</i>AI 冲击</button>
-    <button data-v="method"><i>10</i>口径与证据</button>
+    <button data-v="intl"><i>09</i>国际升学</button>
+    <button data-v="academic"><i>10</i>学术研究</button>
+    <button data-v="ai"><i>11</i>AI 冲击</button>
+    <button data-v="method"><i>12</i>口径与证据</button>
   </aside>
 
   <main class="main">
@@ -337,6 +339,100 @@
         <p><b>对外经贸：</b>金融学 020204「调整为硕博连读贯通培养项目，<b>不单设学术学位硕士招生</b>」。</p>
         <p><b>中国人民大学：</b>2027 全国统考专业目录里<b>查不到 020204 金融学</b>，财政金融学院统考只有 025100 金融、0261S1 金融科技。</p>
         <p><b>上海交大安泰：</b>「全日制科学学位硕士学习年限为<b>两年半</b>」，且按一级学科（应用经济学）招生。</p>
+      </div>
+    </section>
+
+    <!-- ===== 09 国际升学 ===== -->
+    <section class="view" id="v-intl">
+      <div class="head">
+        <div class="eb">International Study</div>
+        <h1>国际升学数据库：出国留学有哪些选择</h1>
+        <p>按图片要求的八个字段组织：国家地区、高校学院专业、学制学费、GPA 语言科研要求、申请时间与材料、
+          奖学金、毕业去向、学位认可与政策。<b>九个项目中只有 NUS 一项取到官网费用原文</b>，其余为量级参考。</p>
+      </div>
+
+      <div class="kpis" id="intlKpi"></div>
+
+      <div class="panel">
+        <h2>国家与地区：学制、费用、语言门槛</h2>
+        <p class="note">费用为当地货币口径与人民币估算区间（按 1 GBP≈9.2、1 USD≈7.2、1 HKD≈0.92、1 SGD≈5.35、1 AUD≈4.7）。</p>
+        <div class="scroll"><table class="tb" id="intlRegionTb"></table></div>
+      </div>
+
+      <div class="panel">
+        <h2>代表项目（9 个）</h2>
+        <p class="note">● 官网原文核实；▲ 量级参考，须以目标院校当年官网为准。</p>
+        <div class="scroll"><table class="tb" id="intlProgTb"></table></div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>申请时间线（大四入学，倒推）</h2>
+          <div id="intlTimeline"></div>
+        </div>
+        <div class="panel">
+          <h2>奖学金与资金支持</h2>
+          <div class="scroll"><table class="tb" id="intlFundTb"></table></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>学位认可与政策衔接</h2>
+        <p class="note">这些决定「读完能不能用」，比学费更影响实际收益。<b>政策每年调整，须按最新文件核对。</b></p>
+        <div class="scroll"><table class="tb" id="intlPolicyTb"></table></div>
+      </div>
+
+      <div class="take warn">
+        <h3>为什么只有一项标绿</h3>
+        <p id="intlNote"></p>
+      </div>
+    </section>
+
+    <!-- ===== 10 学术研究 ===== -->
+    <section class="view" id="v-academic">
+      <div class="head">
+        <div class="eb">Academic Research</div>
+        <h1>学术研究数据库：如果走学术道路，具体研究什么</h1>
+        <p>按图片要求的九个字段组织：学科方向、细分主题、经典文献、研究方法、数据库与工具、
+          典型研究问题、课题组与项目、成果评价、博士后与职业路径。</p>
+      </div>
+
+      <div class="kpis" id="acKpi"></div>
+
+      <div class="panel">
+        <h2>六个学科：方向 / 经典文献 / 方法 / 典型问题</h2>
+        <p class="note">点学科名切换。<b>文献为「作者＋年份＋标题」，可直接检索核对。</b></p>
+        <div id="acTabs" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"></div>
+        <div id="acBody"></div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>常用数据库</h2>
+          <div class="scroll"><table class="tb" id="acDbTb"></table></div>
+        </div>
+        <div class="panel">
+          <h2>工具链</h2>
+          <div class="scroll"><table class="tb" id="acToolTb"></table></div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>学术成果评价方式</h2>
+          <div class="scroll"><table class="tb" id="acEvalTb"></table></div>
+        </div>
+        <div class="panel">
+          <h2>博士后与学术职业路径</h2>
+          <div id="acCareer"></div>
+        </div>
+      </div>
+
+      <div class="take">
+        <h3>这份数据库能回答什么、不能回答什么</h3>
+        <p id="acNote"></p>
+        <p style="margin-top:8px">它<b>不能</b>回答「某校某导师今年招几个人」——那属于课题组层面的实时信息，
+          只能通过学院官网、招生目录与邮件联系获取。</p>
       </div>
     </section>
 
