@@ -395,14 +395,100 @@
   }
 
   function renderDir() {
-    let h = `<thead><tr><th style="width:96px">专业</th><th style="width:96px">学位</th>
-             <th style="width:110px">学制</th><th>方向（节选）</th></tr></thead><tbody>`;
-    D.grad.directions.forEach(d => {
-      h += `<tr><td><b>${d.major}</b></td><td>${d.degree}</td><td>${d.year}</td>
-            <td style="font-size:11.5px">${d.dir}</td></tr>`;
-    });
-    el("dirTb").innerHTML = h + "</tbody>";
     el("exclusiveNote").textContent = D.grad.exclusive;
+  }
+
+  /* ---------- 研究生 KPI ---------- */
+  function renderGradKpi() {
+    const all = D.grad.all;
+    const deptN = new Set(all.map(a => a[1])).size;
+    const admit = all.filter(a => a[6] !== null);
+    const total = admit.reduce((s, a) => s + a[6], 0);
+    const cards = [
+      { n: all.length, u: " 条", l: "招生档案", d: "2027 年招生目录", cls: "" },
+      { n: deptN, u: " 个", l: "培养单位", d: "不止金融会计审计", cls: "blue" },
+      { n: total, u: " 人", l: "2025 年录取合计", d: `${admit.length} 条有录取数`, cls: "gold" },
+      { n: all.filter(a => a[5] === "数智支撑").length, u: " 条", l: "数智支撑方向", d: "信息学院 + 人工智能研究院", cls: "" },
+      { n: all.filter(a => a[3] === "非全日制").length, u: " 条", l: "非全日制", d: "仅招在职定向", cls: "down" },
+      { n: all.filter(a => a[4] === 3).length, u: " 条", l: "学制 3 年", d: "多为学术学位", cls: "" }
+    ];
+    el("gradKpi").innerHTML = cards.map(k => `
+      <div class="kpi ${k.cls}">
+        <div class="n">${k.n}<small>${k.u}</small></div>
+        <div class="l">${k.l}</div>
+        <div class="d">${k.d}</div>
+      </div>`).join("");
+  }
+
+  /* ---------- 培养单位分布 ---------- */
+  function renderDept() {
+    const rows = D.grad.byDept;
+    const W = 940, L = 210, R = 46, T = 6, rowH = 26;
+    const H = T + rows.length * rowH + 16, iw = W - L - R, maxV = 6;
+    let g = "";
+    rows.forEach((r, i) => {
+      const y = T + i * rowH, by = y + 5, bh = 13;
+      const w = (r[1] / maxV) * iw;
+      const name = r[0].length > 16 ? r[0].slice(0, 16) + "…" : r[0];
+      g += txt(L - 8, by + 10, name, { anchor: "end", size: 10,
+               fill: r[1] >= 5 ? INK : SUB });
+      g += `<rect x="${L}" y="${by}" width="${iw}" height="${bh}" fill="#f4f8f7" rx="3"/>`;
+      g += `<rect x="${L}" y="${by}" width="${w.toFixed(1)}" height="${bh}"
+              fill="${r[1] >= 5 ? TEAL : "#7cbfae"}" rx="3" opacity="0.8"/>`;
+      g += txt(L + w + 7, by + 10, r[1] + " 条", { size: 10, fill: INK });
+    });
+    el("chDept").innerHTML = svg(W, H, g);
+  }
+
+  /* ---------- 录取规模 Top ---------- */
+  function renderTopAdmit() {
+    const rows = D.grad.topAdmit;
+    const W = 450, L = 130, R = 74, T = 6, rowH = 30;
+    const H = T + rows.length * rowH + 14, iw = W - L - R, maxV = 400;
+    let g = "";
+    rows.forEach((r, i) => {
+      const y = T + i * rowH, by = y + 8, bh = 14;
+      const w = (r[2] / maxV) * iw;
+      const nm = r[0].length > 7 ? r[0].slice(0, 7) + "…" : r[0];
+      g += txt(L - 8, by + 10, nm, { anchor: "end", size: 10, fill: INK });
+      g += `<rect x="${L}" y="${by}" width="${iw}" height="${bh}" fill="#f4f8f7" rx="3"/>`;
+      g += `<rect x="${L}" y="${by}" width="${w.toFixed(1)}" height="${bh}"
+              fill="${r[3] === "非全日制" ? GOLD : TEAL}" rx="3" opacity="0.8"/>`;
+      g += txt(L + w + 7, by + 10, r[2] + " 人", { size: 10, fill: INK });
+      g += txt(W - R + 64, by + 10, r[3] === "非全日制" ? "非全" : "全日制",
+               { size: 9, fill: r[3] === "非全日制" ? GOLD : TEAL });
+    });
+    el("chTopAdmit").innerHTML = svg(W, H, g);
+  }
+
+  /* ---------- 66 条全清单 ---------- */
+  let gradFilter = "全部";
+  function renderGradAll() {
+    const all = D.grad.all;
+    const depts = ["全部", ...Array.from(new Set(all.map(a => a[1].split("／")[0])))];
+    el("gradFilter").innerHTML = depts.map(d =>
+      `<button data-d="${d}" class="fbtn${d === gradFilter ? " on" : ""}">${d}</button>`).join("");
+    el("gradFilter").querySelectorAll("button").forEach(b => {
+      b.onclick = () => { gradFilter = b.dataset.d; renderGradAll(); };
+    });
+
+    const rows = all.filter(a => gradFilter === "全部" || a[1].split("／")[0] === gradFilter);
+    let h = `<thead><tr><th style="width:21%">培养单位</th><th style="width:110px">专业</th>
+             <th style="width:74px">学位</th><th style="width:64px">形式</th>
+             <th style="width:48px">学制</th><th style="width:80px">2025 录取</th>
+             <th>方向与限制</th></tr></thead><tbody>`;
+    rows.forEach(a => {
+      const onlyTui = a[7].indexOf("仅推免") >= 0 || a[7].indexOf("仅接收推免") >= 0;
+      h += `<tr>
+        <td style="font-size:11px;color:#7a8a86">${a[1]}</td>
+        <td><b>${a[0]}</b>${onlyTui ? ' <span class="badge b-fix">仅推免</span>' : ""}</td>
+        <td style="font-size:11px">${a[2]}</td>
+        <td style="font-size:11px">${a[3]}</td>
+        <td>${a[4]} 年</td>
+        <td class="num">${a[6] === null ? '<span style="color:#b0bcb8">—</span>' : a[6] + " 人"}</td>
+        <td style="font-size:11px">${a[7]}</td></tr>`;
+    });
+    el("gradAllTb").innerHTML = h + `</tbody>`;
   }
 
   function renderPlan() {
@@ -437,17 +523,18 @@
 
   /* ---------- 岗位族 ---------- */
   function renderFamilies() {
-    const rows = D.families, W = 940, L = 200, R = 150, T = 8;
-    const rowH = 34, H = T + rows.length * rowH + 18, iw = W - L - R, maxV = 100;
+    const rows = D.families, W = 940, L = 210, R = 150, T = 8;
+    const rowH = 27, H = T + rows.length * rowH + 18, iw = W - L - R, maxV = 100;
     let g = "";
     rows.forEach((f, i) => {
       const y = T + i * rowH, by = y + 7, bh = 17;
       const w = (f.ratio / maxV) * iw;
       const strong = f.ratio >= 64;
-      g += txt(L - 10, by + 12, f.name, { anchor: "end", size: 11, fill: strong ? INK : SUB });
+      const gc = f.grp === "财经核心" ? TEAL : (f.grp === "泛商科" ? "#4a8fb5" : GOLD);
+      g += txt(L - 10, by + 12, f.name, { anchor: "end", size: 10.5, fill: strong ? INK : SUB });
       g += `<rect x="${L}" y="${by}" width="${iw}" height="${bh}" fill="#f4f8f7" rx="3"/>`;
       g += `<rect x="${L}" y="${by}" width="${w.toFixed(1)}" height="${bh}"
-              fill="${strong ? TEAL : GOLD}" rx="3" opacity="${strong ? 0.85 : 0.7}"/>`;
+              fill="${gc}" rx="3" opacity="${strong ? 0.85 : 0.6}"/>`;
       g += txt(L + w + 8, by + 12, f.ratio + "%", { size: 11, fill: INK });
       g += txt(W - R + 56, by + 12, `${f.salary[0]}—${f.salary[1]} 万/年`,
                { size: 10.5, fill: SUB });
@@ -456,8 +543,10 @@
     g += txt(W - R + 56, H - 6, "起薪区间（■ 模型）", { size: 10 });
     el("chFamilies").innerHTML = svg(W, H, g) +
       `<div class="legend" style="margin-top:10px">
-        <span><i style="background:${TEAL}"></i>本科可报 ≥ 64%（不读研也能进）</span>
-        <span><i style="background:${GOLD}"></i>本科可报 &lt; 64%（硕士门槛）</span>
+        <span><i style="background:${TEAL}"></i>财经核心</span>
+        <span><i style="background:#4a8fb5"></i>泛商科</span>
+        <span><i style="background:${GOLD}"></i>公共部门与专业服务</span>
+        <span style="color:#8a9a96">浅色＝本科可报 &lt; 64%（硕士门槛更高）</span>
       </div>`;
   }
 
@@ -605,6 +694,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
       try { history.replaceState(null, "", "#" + v); } catch (e) {}
       if (v === "majors") renderMajorTable();
+      if (v === "grad") renderGradAll();
     }
     btns.forEach(b => b.addEventListener("click", () => go(b.dataset.v)));
     const hash = (location.hash || "").replace("#", "");
@@ -630,6 +720,10 @@
     renderDeg();
     renderYr();
     renderDir();
+    renderGradKpi();
+    renderDept();
+    renderTopAdmit();
+    renderGradAll();
     renderPlan();
     renderFee();
     renderFamilies();
