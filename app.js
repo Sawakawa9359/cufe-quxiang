@@ -438,6 +438,44 @@
       g += txt(L + w + 7, by + 10, r[1] + " 条", { size: 10, fill: INK });
     });
     el("chDept").innerHTML = svg(W, H, g);
+
+    // 培养单位矩阵
+    const map = {};
+    D.grad.all.forEach(x => {
+      const key = x[1];
+      if (!map[key]) {
+        map[key] = { n: 0, ac: 0, pr: 0, lx: 0, full: 0, part: 0, admit: 0, majors: [] };
+      }
+      const o = map[key];
+      o.n++;
+      if (x[2] === "学术学位") o.ac++;
+      else if (x[2] === "专业学位") o.pr++;
+      else o.lx++;
+      if (x[3] === "非全日制") o.part++; else o.full++;
+      o.admit += (x[6] || 0);
+      o.majors.push(x[0] + (x[3] === "非全日制" ? "·非全" : ""));
+    });
+
+    const mrows = Object.keys(map)
+      .map(k => [k, map[k]])
+      .sort((p, q) => q[1].n - p[1].n || q[1].admit - p[1].admit);
+
+    let h = `<thead><tr><th style="width:22%">培养单位</th><th style="width:52px">条数</th>
+             <th style="width:52px">学硕</th><th style="width:52px">专硕</th>
+             <th style="width:74px">硕博连读</th><th style="width:88px">2025 录取</th>
+             <th>专业清单</th></tr></thead><tbody>`;
+    mrows.forEach(([k, o]) => {
+      h += `<tr>
+        <td><b>${k}</b></td>
+        <td class="num">${o.n}</td>
+        <td class="num">${o.ac || '<span style="color:#c9c9c0">—</span>'}</td>
+        <td class="num">${o.pr || '<span style="color:#c9c9c0">—</span>'}</td>
+        <td class="num">${o.lx || '<span style="color:#c9c9c0">—</span>'}</td>
+        <td class="num">${o.admit ? o.admit + " 人" : '<span style="color:#c9c9c0">—</span>'}</td>
+        <td style="font-size:11px;line-height:1.7">${o.majors.join("、")}</td>
+      </tr>`;
+    });
+    el("deptTb").innerHTML = h + "</tbody>";
   }
 
   /* ---------- 录取规模 Top ---------- */
