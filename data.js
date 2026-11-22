@@ -475,6 +475,242 @@ window.DATA = {
     "AI 优先压缩流程化、标准化、重复性强的入门级任务，而非替代整个职业"
   ],
 
+  /* ================= 九、国际升学数据库 ================= */
+
+  intl: {
+    /* 国家地区：学制与费用区间（▲ 量级参考，按当年汇率与官网核对） */
+    regions: [
+      { name: "英国", year: "1 年为主", feeLocal: "£25,000—40,000", feeCny: [23, 37],
+        lang: "IELTS 6.5—7.0（单项 6.0—6.5）", note: "商科多为 1 年制，课程密度高；Graduate Route 可留 2 年工作" },
+      { name: "美国", year: "1—2 年", feeLocal: "$50,000—80,000/年", feeCny: [36, 58],
+        lang: "TOEFL 100+ / IELTS 7.0+", note: "多为 2 年，STEM 方向 OPT 可延至 3 年；总成本最高" },
+      { name: "中国香港", year: "1 年", feeLocal: "HK$300,000—500,000", feeCny: [27, 45],
+        lang: "IELTS 6.5—7.0", note: "毕业可申请 IANG 签证留港 12 个月；内地认可度高" },
+      { name: "新加坡", year: "1—1.5 年", feeLocal: "S$60,000—80,000", feeCny: [32, 43],
+        lang: "IELTS 7.0 / TOEFL 100", note: "NUS、NTU 商科为主；就业准证 EP 门槛逐年上调" },
+      { name: "澳大利亚", year: "1.5—2 年", feeLocal: "A$45,000—60,000/年", feeCny: [21, 28],
+        lang: "IELTS 6.5—7.0", note: "2 年制便于申请工作签证；八大商科学费偏高" },
+      { name: "加拿大", year: "1—2 年", feeLocal: "C$30,000—55,000/年", feeCny: [16, 29],
+        lang: "IELTS 6.5—7.0", note: "部分项目带 co-op；移民通道相对明确" }
+    ],
+
+    /* 代表项目（● 官网原文 / ▲ 量级参考） */
+    programs: [
+      { school: "新加坡国立大学 NUS", prog: "MSc Finance", region: "新加坡", year: "1 年",
+        fee: "S$71,200（不含 GST）／S$77,608（含 9% GST）",
+        lang: "IELTS 7.0 / TOEFL 100", req: "GMAT/GRE 建议提交；相关本科背景",
+        status: "ok", src: "mscfin.nus.edu.sg/programme-fees，2027 年 8 月入学",
+        detail: "申请费 S$100｜接受费 S$10,900｜第一期 S$33,354（8 月入学）｜第二期 S$33,354（次年 1 月）" },
+      { school: "香港大学 HKU", prog: "Master of Finance", region: "中国香港", year: "1—2 年",
+        fee: "约 HK$400,000—500,000", lang: "IELTS 6.5（单项 5.5）",
+        req: "GMAT/GRE 建议；2 年以上工作经验优先（部分方向）", status: "ref", src: "项目页 SSL 拦截，未取到原文" },
+      { school: "香港中文大学 CUHK", prog: "MSc in Finance", region: "中国香港", year: "1 年",
+        fee: "约 HK$350,000—450,000", lang: "IELTS 6.5 / TOEFL 79",
+        req: "GMAT/GRE 建议提交", status: "ref", src: "项目页 404，未取到原文" },
+      { school: "香港科技大学 HKUST", prog: "MSc in Finance", region: "中国香港", year: "1 年",
+        fee: "约 HK$400,000", lang: "IELTS 6.5（单项 5.5）/ TOEFL 80",
+        req: "GMAT/GRE 建议；量化背景优先", status: "ref", src: "页面为 JS 渲染，未取到正文" },
+      { school: "伦敦政治经济学院 LSE", prog: "MSc Finance", region: "英国", year: "1 年",
+        fee: "约 £45,000", lang: "IELTS 7.0（单项 6.5）",
+        req: "二等一荣誉学位以上；GMAT 建议 700+", status: "ref", src: "官网 URL 结构调整，多轮 404" },
+      { school: "帝国理工学院 Imperial", prog: "MSc Finance", region: "英国", year: "1 年",
+        fee: "约 £45,000", lang: "IELTS 7.0（单项 6.5）",
+        req: "量化背景强；GMAT 建议提交", status: "ref", src: "页面未返回正文" },
+      { school: "华威大学 Warwick", prog: "MSc Finance", region: "英国", year: "1 年",
+        fee: "约 £38,000", lang: "IELTS 7.0（两项 6.0/6.5）",
+        req: "相关本科背景；GMAT 非强制", status: "ref", src: "课程页 404" },
+      { school: "南洋理工大学 NTU", prog: "MSc Finance", region: "新加坡", year: "1 年",
+        fee: "约 S$65,000", lang: "IELTS 6.5—7.0",
+        req: "GMAT/GRE 建议；商科背景", status: "ref", src: "仅取到项目列表页，未到费用页" },
+      { school: "墨尔本大学 Melbourne", prog: "Master of Finance", region: "澳大利亚", year: "1.5—2 年",
+        fee: "约 A$50,000/年", lang: "IELTS 6.5（单项 6.0）",
+        req: "相关背景可减免学分", status: "ref", src: "未抓取" }
+    ],
+
+    /* 申请时间线（以大四入学为基准倒推） */
+    timeline: [
+      { stage: "大一", todo: "GPA 是硬门槛（多数项目要求 3.3/4.0 或 85/100 以上）；确定是否走国际路线" },
+      { stage: "大二", todo: "雅思/托福首考；争取第一份实习（券商、四大、外企）" },
+      { stage: "大三上", todo: "GMAT/GRE 出分；锁定 8—12 所目标院校；联系推荐人" },
+      { stage: "大三下", todo: "文书素材整理（PS/CV）；部分项目 9 月开放首轮" },
+      { stage: "大四上", todo: "9—12 月首轮申请（港新英多为滚动录取，首轮命中率最高）" },
+      { stage: "大四下", todo: "补申与候补；确认 offer、办签证、订宿舍" }
+    ],
+
+    /* 奖学金与资金 */
+    funding: [
+      { name: "国家留学基金委（CSC）", note: "主要面向博士与访问学者；硕士覆盖有限，需按年度选派简章" },
+      { name: "英国志奋领（Chevening）", note: "覆盖学费＋生活费，要求 2 年工作经验，应届生不适用" },
+      { name: "香港博士奖学金（HKPFS）", note: "博士专用，月津贴约 HK$28,000，竞争激烈" },
+      { name: "NUS / NTU 项目奖学金", note: "部分商科项目设 10%—50% 学费减免，随 offer 评定" },
+      { name: "院校 Merit-based 奖学金", note: "多数英港项目有，金额小、自动评定，不需单独申请" }
+    ],
+
+    /* 学位认可与政策 */
+    policy: [
+      { item: "学历学位认证", content: "回国后须在教育部留学服务中心办理国（境）外学历学位认证，是考公、落户、国企入职的前提" },
+      { item: "上海留学生落户", content: "按院校世界排名分档：前 50 可直接落户，51—100 需 6 个月社保，其余按基数与时长要求" },
+      { item: "北京落户", content: "通过留服中心指标或用人单位指标，名额紧、对院校与专业有要求" },
+      { item: "香港 IANG 签证", content: "在港毕业可申请 12 个月无条件留港找工作，续签需受雇" },
+      { item: "英国 Graduate Route", content: "毕业后可留英 2 年（博士 3 年）工作，无需雇主担保" },
+      { item: "新加坡 EP", content: "就业准证按 COMPASS 计分，薪资门槛逐年上调，金融业门槛更高" }
+    ],
+
+    note: "本表 9 个项目中仅 NUS 一项取到官网费用原文（●）；其余 8 项为量级参考（▲），学费与语言要求须以目标院校当年官网为准。"
+  },
+
+  /* ================= 十、学术研究数据库 ================= */
+
+  academic: {
+    /* 六个学科：方向 / 主题 / 经典文献 / 方法 / 典型问题 */
+    fields: [
+      { name: "金融学", color: "#0f7a66",
+        topics: ["资产定价", "公司金融", "行为金融", "市场微观结构", "金融计量", "金融科技与数字金融"],
+        classics: [
+          "Markowitz (1952) Portfolio Selection —— 均值—方差组合理论",
+          "Modigliani & Miller (1958) The Cost of Capital —— 资本结构无关论",
+          "Sharpe (1964) CAPM —— 资本资产定价模型",
+          "Jensen & Meckling (1976) 代理成本与所有权结构",
+          "Ross (1977) 信号传递与融资顺序",
+          "Kyle (1985) 连续拍卖中的做市与信息",
+          "Fama & French (1993) 三因子模型",
+          "Shleifer & Vishny (1997) 套利限制"
+        ],
+        methods: ["事件研究法", "Fama-MacBeth 截面回归", "GMM", "工具变量", "DID", "结构模型估计"],
+        questions: [
+          "A 股动量与反转的方向为何与美股不同？",
+          "注册制改革如何影响 IPO 定价效率与抑价率？",
+          "ESG 评级是否已被市场定价，还是仅影响资金流？",
+          "公募基金业绩是否可持续，选股与择时各贡献多少？"
+        ] },
+      { name: "经济学", color: "#2b5d8a",
+        topics: ["微观理论", "宏观经济学", "计量经济学", "发展经济学", "劳动经济学", "产业组织"],
+        classics: [
+          "Samuelson (1947) Foundations of Economic Analysis",
+          "Arrow & Debreu (1954) 一般均衡的存在性",
+          "Solow (1956) 经济增长理论",
+          "Lucas (1976) 政策评价的计量批判",
+          "Kydland & Prescott (1982) 真实经济周期",
+          "Angrist & Imbens (1994) 局部平均处理效应（LATE）",
+          "Acemoglu, Johnson & Robinson (2001) 制度与长期增长"
+        ],
+        methods: ["工具变量", "双重差分", "断点回归", "合成控制", "随机对照实验", "结构估计"],
+        questions: [
+          "最低工资上调对就业的净效应（中国版 Card-Krueger）",
+          "高铁开通对区域经济收敛的作用",
+          "高校扩招的教育回报率与技能错配",
+          "产业补贴是否提升了企业全要素生产率？"
+        ] },
+      { name: "会计学", color: "#b8852f",
+        topics: ["财务会计", "审计", "管理会计", "信息披露", "税务会计"],
+        classics: [
+          "Ball & Brown (1968) 会计盈余的信息含量",
+          "Jensen & Meckling (1976) 代理成本框架",
+          "DeAngelo (1981) 审计质量与事务所规模",
+          "Basu (1997) 会计稳健性",
+          "Healy & Wahlen (1999) 盈余管理综述"
+        ],
+        methods: ["档案式研究", "事件研究", "实验研究", "分析式模型"],
+        questions: [
+          "新收入准则对上市公司盈余管理方式的影响",
+          "事务所强制轮换是否真的提高审计质量？",
+          "关键审计事项（KAM）披露是否具有信息含量？",
+          "ESG 披露是否存在行业溢出效应？"
+        ] },
+      { name: "财政学", color: "#6b8f5e",
+        topics: ["最优税收", "财政分权", "公共品供给", "社会保障", "政府债务"],
+        classics: [
+          "Ramsey (1927) 最优税制理论",
+          "Tiebout (1956) 地方公共品的「用脚投票」",
+          "Mirrlees (1971) 最优所得税",
+          "Oates (1972) 财政联邦主义",
+          "Qian & Weingast (1997) 中国式财政联邦主义"
+        ],
+        methods: ["税收弹性估计", "DID", "断点回归", "微观模拟"],
+        questions: [
+          "增值税留抵退税的政策效果与企业行为",
+          "地方债务扩张对财政可持续性的影响",
+          "个税专项附加扣除的再分配效应",
+          "社保降费如何影响企业用工与投资？"
+        ] },
+      { name: "统计学", color: "#8b5e3c",
+        topics: ["数理统计", "贝叶斯统计", "高维统计", "时间序列", "因果推断"],
+        classics: [
+          "Fisher (1922) 统计方法与推断",
+          "Neyman & Pearson (1933) 假设检验框架",
+          "Rubin (1974) 潜在结果框架",
+          "Hansen (1982) 广义矩估计（GMM）",
+          "Tibshirani (1996) Lasso 与变量选择"
+        ],
+        methods: ["极大似然", "Bootstrap", "MCMC", "EM 算法", "高维惩罚回归"],
+        questions: [
+          "高维变量选择在信用评分中的应用",
+          "波动率模型对极端行情的预测能力",
+          "异质性处理效应的识别与估计",
+          "缺失数据的多重插补与敏感性分析"
+        ] },
+      { name: "管理科学与工程", color: "#9b8fc4",
+        topics: ["运筹优化", "供应链管理", "决策分析", "信息系统", "服务运营"],
+        classics: [
+          "Nash (1950) 非合作博弈的均衡点",
+          "Arrow, Harris & Marschak (1951) 报童模型",
+          "Lee, Padmanabhan & Whang (1997) 牛鞭效应",
+          "Teece (2007) 动态能力与战略管理"
+        ],
+        methods: ["优化建模", "离散事件仿真", "实证研究", "案例研究"],
+        questions: [
+          "供应链中断风险下的库存与备份策略",
+          "平台补贴对双边市场参与者结构的影响",
+          "数字化转型如何影响企业绩效？",
+          "共享经济中的动态定价与匹配效率"
+        ] }
+    ],
+
+    /* 常用数据库 */
+    databases: [
+      { name: "CSMAR 国泰安", use: "A 股财务、治理、股价、基金，中文研究最常用", scope: "中国" },
+      { name: "CNRDS 中国研究数据服务平台", use: "文本、ESG、绿色专利、数字化等特色库", scope: "中国" },
+      { name: "Wind 万得", use: "宏观、行业、债券、研报，终端为主", scope: "中国" },
+      { name: "CEIC", use: "中国与新兴市场宏观高频数据", scope: "全球" },
+      { name: "CFPS 中国家庭追踪调查", use: "家庭收入、教育、健康面板", scope: "中国" },
+      { name: "CGSS 中国综合社会调查", use: "社会态度、阶层、就业", scope: "中国" },
+      { name: "CHIP 中国家庭收入调查", use: "收入分配与不平等研究", scope: "中国" },
+      { name: "WRDS（Compustat / CRSP / IBES）", use: "美股财务、股价、分析师预测", scope: "美国" },
+      { name: "Bloomberg / Refinitiv", use: "全球固收、汇率、衍生品、ESG", scope: "全球" },
+      { name: "World Bank / IMF IFS / OECD", use: "跨国宏观与发展指标", scope: "全球" }
+    ],
+
+    /* 工具链 */
+    tools: [
+      { name: "Stata", use: "计量实证主流，reghdfe / ivreg2 / csdid 等命令生态成熟" },
+      { name: "R", use: "统计建模与可视化，tidyverse / fixest / ggplot2" },
+      { name: "Python", use: "数据处理与机器学习，pandas / statsmodels / scikit-learn" },
+      { name: "MATLAB", use: "结构模型求解、优化与仿真" },
+      { name: "LaTeX", use: "论文排版，配合中文模板（ctex）" },
+      { name: "Zotero / EndNote", use: "文献管理与引用格式" },
+      { name: "Git", use: "代码与复现材料版本控制" }
+    ],
+
+    /* 成果评价 */
+    evaluation: [
+      { item: "国际期刊分级", content: "UTD24（商科顶刊）、FT50、ABS 4*／4；金融顶刊为 JF、JFE、RFS，会计为 JAR、JAE、TAR" },
+      { item: "中文期刊分级", content: "多数高校自定 A/B/C 类目录，《经济研究》《管理世界》《金融研究》《会计研究》通常列 A 类" },
+      { item: "常用指标", content: "影响因子、他引次数、H-index；均存在可操纵与学科不可比问题" },
+      { item: "改革方向", content: "「破五唯」后推行代表作制度，强调质量与实际贡献，部分高校取消单纯数量考核" }
+    ],
+
+    /* 学术职业路径 */
+    career: [
+      { stage: "博士在读", note: "3—5 年；关键产出是 Job Market Paper 与 1—2 篇发表" },
+      { stage: "博士后 / 师资博士后", note: "2—3 年；国内 985 常见「师资博士后」作为预聘前置" },
+      { stage: "预聘制（Tenure-track）", note: "助理教授／讲师，6 年考核期；需达到发表、项目、教学要求，非升即走" },
+      { stage: "长聘", note: "副教授 → 教授；考核转为周期性聘期评估" },
+      { stage: "替代路径", note: "券商研究所、监管机构、政策智库、国际组织；博士学历是门槛而非充分条件" }
+    ],
+
+    note: "文献条目为公开经典文献（作者＋年份＋标题），可直接检索核对；学科方向与方法为该领域通行划分，非某一校培养方案。"
+  },
+
   /* ================= 八、口径 ================= */
 
   legend: [
