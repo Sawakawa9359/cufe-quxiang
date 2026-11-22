@@ -740,6 +740,140 @@
     window.go = go;
   }
 
+  /* ---------- 国际升学 ---------- */
+  function renderIntl() {
+    const I = D.intl;
+    const okN = I.programs.filter(p => p.status === "ok").length;
+
+    el("intlKpi").innerHTML = [
+      { n: I.regions.length, u: " 个", l: "国家与地区", d: "英 / 美 / 港 / 新 / 澳 / 加", cls: "" },
+      { n: I.programs.length, u: " 个", l: "代表项目", d: `其中 ${okN} 个取到官网原文`, cls: "gold" },
+      { n: "1", u: " 年", l: "英国 / 香港主流学制", d: "美国多为 2 年", cls: "blue" },
+      { n: "2", u: " 年", l: "英国 Graduate Route 留英期", d: "博士 3 年", cls: "" },
+      { n: "8", u: " 项", l: "申请要素", d: "GPA / 语言 / GMAT / 文书", cls: "" },
+      { n: "6", u: " 类", l: "政策衔接", d: "认证、落户、签证", cls: "down" }
+    ].map(k => `<div class="kpi ${k.cls}"><div class="n">${k.n}<small>${k.u}</small></div>
+      <div class="l">${k.l}</div><div class="d">${k.d}</div></div>`).join("");
+
+    // 地区表
+    let h = `<thead><tr><th style="width:120px">国家 / 地区</th><th style="width:100px">学制</th>
+      <th style="width:150px">学费（当地货币）</th><th style="width:120px">人民币估算</th>
+      <th style="width:180px">语言门槛</th><th>特点</th></tr></thead><tbody>`;
+    I.regions.forEach(r => {
+      h += `<tr><td><b>${r.name}</b></td><td>${r.year}</td><td>${r.feeLocal}</td>
+        <td class="num">${r.feeCny[0]}—${r.feeCny[1]} 万元</td>
+        <td style="font-size:11.5px">${r.lang}</td>
+        <td style="font-size:11.5px">${r.note}</td></tr>`;
+    });
+    el("intlRegionTb").innerHTML = h + "</tbody>";
+
+    // 项目表
+    let p = `<thead><tr><th style="width:170px">院校</th><th style="width:150px">项目</th>
+      <th style="width:90px">地区</th><th style="width:76px">学制</th>
+      <th style="width:190px">学费</th><th style="width:150px">语言</th>
+      <th>要求与依据</th><th style="width:64px">状态</th></tr></thead><tbody>`;
+    I.programs.forEach(x => {
+      const badge = x.status === "ok"
+        ? '<span class="badge b-ok">官网</span>'
+        : '<span class="badge b-fix">参考</span>';
+      p += `<tr><td><b>${x.school}</b></td><td>${x.prog}</td><td>${x.region}</td>
+        <td>${x.year}</td><td style="font-size:11.5px">${x.fee}
+          ${x.detail ? `<div style="font-size:10px;color:#8a9a96;margin-top:3px">${x.detail}</div>` : ""}</td>
+        <td style="font-size:11px">${x.lang}</td>
+        <td style="font-size:11px">${x.req}
+          <div style="font-size:10px;color:#a0aca8;margin-top:2px">${x.src}</div></td>
+        <td>${badge}</td></tr>`;
+    });
+    el("intlProgTb").innerHTML = p + "</tbody>";
+
+    // 时间线
+    el("intlTimeline").innerHTML = I.timeline.map((t, i) => `
+      <div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid ${LINE}">
+        <div style="flex:0 0 62px;font-size:12px;font-weight:700;color:${TEAL}">${t.stage}</div>
+        <div style="flex:1;font-size:12px;line-height:1.7;color:#2a423c">${t.todo}</div>
+      </div>`).join("");
+
+    // 奖学金
+    let f = `<thead><tr><th style="width:38%">项目</th><th>说明</th></tr></thead><tbody>`;
+    I.funding.forEach(x => { f += `<tr><td><b>${x.name}</b></td><td style="font-size:11.5px">${x.note}</td></tr>`; });
+    el("intlFundTb").innerHTML = f + "</tbody>";
+
+    // 政策
+    let q = `<thead><tr><th style="width:22%">事项</th><th>内容</th></tr></thead><tbody>`;
+    I.policy.forEach(x => { q += `<tr><td><b>${x.item}</b></td><td style="font-size:11.5px">${x.content}</td></tr>`; });
+    el("intlPolicyTb").innerHTML = q + "</tbody>";
+
+    el("intlNote").textContent = I.note;
+  }
+
+  /* ---------- 学术研究 ---------- */
+  let acTab = 0;
+
+  function renderAc() {
+    const A = D.academic;
+    el("acKpi").innerHTML = [
+      { n: A.fields.length, u: " 个", l: "学科", d: "金融 / 经济 / 会计 / 财政 / 统计 / 管工", cls: "" },
+      { n: A.fields.reduce((s, f) => s + f.classics.length, 0), u: " 篇", l: "经典文献", d: "作者＋年份＋标题，可检索", cls: "blue" },
+      { n: A.fields.reduce((s, f) => s + f.methods.length, 0), u: " 种", l: "研究方法", d: "去重后约 12 种核心方法", cls: "gold" },
+      { n: A.databases.length, u: " 个", l: "常用数据库", d: "中国 7 个 / 全球 3 个", cls: "" },
+      { n: A.fields.reduce((s, f) => s + f.questions.length, 0), u: " 个", l: "典型研究问题", d: "可直接作为选题起点", cls: "" },
+      { n: A.career.length, u: " 阶段", l: "学术职业路径", d: "博士到长聘", cls: "down" }
+    ].map(k => `<div class="kpi ${k.cls}"><div class="n">${k.n}<small>${k.u}</small></div>
+      <div class="l">${k.l}</div><div class="d">${k.d}</div></div>`).join("");
+
+    el("acTabs").innerHTML = A.fields.map((f, i) =>
+      `<button data-i="${i}" class="fbtn${i === acTab ? " on" : ""}">${f.name}</button>`).join("");
+    el("acTabs").querySelectorAll("button").forEach(b => {
+      b.onclick = () => { acTab = +b.dataset.i; renderAc(); };
+    });
+
+    const f = A.fields[acTab];
+    const col = (title, items, color) => `
+      <div style="flex:1;min-width:240px">
+        <div style="font-size:11px;letter-spacing:.08em;color:${color};font-weight:700;margin-bottom:8px">${title}</div>
+        <ul style="margin:0;padding-left:16px;font-size:12px;line-height:1.9;color:#2a423c">
+          ${items.map(x => `<li>${x}</li>`).join("")}
+        </ul>
+      </div>`;
+
+    el("acBody").innerHTML = `
+      <div style="border-left:4px solid ${f.color};padding-left:14px;margin-bottom:14px">
+        <div style="font-size:16px;font-weight:700">${f.name}</div>
+        <div style="font-size:12px;color:${SUB};margin-top:4px">研究方向：${f.topics.join(" · ")}</div>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        ${col("经典理论与代表性文献", f.classics, f.color)}
+        ${col("常见研究方法", f.methods, f.color)}
+        ${col("典型研究问题", f.questions, f.color)}
+      </div>`;
+
+    // 数据库
+    let d = `<thead><tr><th style="width:30%">名称</th><th style="width:72px">范围</th><th>用途</th></tr></thead><tbody>`;
+    A.databases.forEach(x => {
+      d += `<tr><td><b>${x.name}</b></td><td>${x.scope}</td><td style="font-size:11.5px">${x.use}</td></tr>`;
+    });
+    el("acDbTb").innerHTML = d + "</tbody>";
+
+    // 工具
+    let t = `<thead><tr><th style="width:32%">工具</th><th>用途</th></tr></thead><tbody>`;
+    A.tools.forEach(x => { t += `<tr><td><b>${x.name}</b></td><td style="font-size:11.5px">${x.use}</td></tr>`; });
+    el("acToolTb").innerHTML = t + "</tbody>";
+
+    // 评价
+    let e = `<thead><tr><th style="width:30%">维度</th><th>说明</th></tr></thead><tbody>`;
+    A.evaluation.forEach(x => { e += `<tr><td><b>${x.item}</b></td><td style="font-size:11.5px">${x.content}</td></tr>`; });
+    el("acEvalTb").innerHTML = e + "</tbody>";
+
+    // 职业路径
+    el("acCareer").innerHTML = A.career.map((c, i) => `
+      <div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid ${LINE}">
+        <div style="flex:0 0 118px;font-size:11.5px;font-weight:700;color:${BLUE}">${c.stage}</div>
+        <div style="flex:1;font-size:11.5px;line-height:1.7;color:#2a423c">${c.note}</div>
+      </div>`).join("");
+
+    el("acNote").textContent = A.note;
+  }
+
   function boot() {
     renderKpis();
     renderLegend();
@@ -772,6 +906,8 @@
     renderAi();
     renderSkillChart();
     renderMethod();
+    renderIntl();
+    renderAc();
     initNav();
   }
 
