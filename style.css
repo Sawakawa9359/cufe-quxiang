@@ -107,3 +107,9 @@ table.tb .hl:hover td{background:#fbf0dc}
   .main{padding:18px 14px 60px}
   .head h1{font-size:21px}
 }
+
+/* 筛选按钮 */
+.fbtn{background:#fff;border:1px solid var(--line);color:var(--sub);padding:4px 12px;border-radius:999px;font-size:11.5px;cursor:pointer;font-family:inherit;transition:.15s}
+.fbtn:hover{border-color:#b7d8d0;color:var(--teal)}
+.fbtn.on{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:600}
+
