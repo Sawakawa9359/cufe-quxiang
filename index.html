@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -21,7 +21,7 @@
     <button data-v="majors"><i>04</i>专业版图</button>
     <button data-v="grad"><i>05</i>研究生结构</button>
     <button data-v="jobs"><i>06</i>岗位门槛</button>
-    <button data-v="routes"><i>07</i>三条路径</button>
+    <button data-v="routes"><i>07</i>八条路径</button>
     <button data-v="school"><i>08</i>院校对照</button>
     <button data-v="ai"><i>09</i>AI 冲击</button>
     <button data-v="method"><i>10</i>口径与证据</button>
@@ -66,7 +66,7 @@
            人大统考目录查不到 020204。头部院校的学术硕士通道正在三种方式下同时收窄。</p>
         <p><b>三、学制不是常识。</b>上交安泰学硕 2.5 年、贸大全校硕士 2 年、央财会计专硕 3 年、中南财专硕 2 或 3 年——
            「学硕 3 年、专硕 2 年」这句话在至少四所学校不成立。</p>
-        <p><b>四、真正的分水岭在大三下。</b>保研排名、考研初试、秋招投递三者时间重叠，只能主攻一条。
+        <p><b>四、覆盖面本身就是结论。</b>66 条研究生档案横跨 21 个培养单位，19 个岗位族里财经核心只占 9 个——把财经专业等同于「金融会计审计」，会漏掉近一半的真实出口：财税系统、统计与数据、保险精算、国际商务、公共部门、科技岗。</p><p><b>五、真正的分水岭在大三下。</b>保研排名、考研初试、秋招投递三者时间重叠，只能主攻一条。
            财经类院校深造率长期在五成上下，意味着大一就要开始算排名，而不是大四才想出路。</p>
       </div>
     </section>
@@ -193,9 +193,12 @@
     <section class="view" id="v-grad">
       <div class="head">
         <div class="eb">Graduate Structure</div>
-        <h1>研究生怎么分：四个维度，不是两个格子</h1>
-        <p>以央财 2027 年 66 条招生档案为样本。只看「学硕 / 专硕」会漏掉一半信息。</p>
+        <h1>66 条招生档案：21 个培养单位，不止金融会计审计</h1>
+        <p>覆盖财政税务、金融、会计、商学、经济、管工、保险、政府管理、体育经济、国贸、统计数学、
+          信息、人工智能共 21 个培养单位。按「学位 × 形式 × 学制 × 方向」四个维度同时看。</p>
       </div>
+
+      <div class="kpis" id="gradKpi"></div>
 
       <div class="grid2">
         <div class="panel">
@@ -204,34 +207,46 @@
           <div class="scroll" style="margin-top:10px"><table class="tb" id="degTb"></table></div>
         </div>
         <div class="panel">
-          <h2>学制分布（2 年 34 / 3 年 31 / 5 年 1）</h2>
+          <h2>学制分布（2 年 35 / 3 年 30 / 5 年 1）</h2>
           <div id="chYr"></div>
           <div class="take warn" style="margin:10px 0 0">
             <h3>专硕不一定更短</h3>
-            <p>会计、审计专硕（全日制）3 年，而企业管理、投资学、保险学学硕 2 年。
+            <p>会计、审计专硕（全日制）3 年，而企业管理、投资学、保险学、行政管理学硕 2 年。
                「读专硕省时间」在会计和审计上不成立。</p>
           </div>
         </div>
       </div>
 
       <div class="panel">
-        <h2>方向细分（● 摘自招生目录原文）</h2>
-        <div class="scroll"><table class="tb" id="dirTb"></table></div>
-        <div class="take" style="margin-top:14px">
-          <h3>推免专属通道</h3>
-          <p id="exclusiveNote"></p>
-        </div>
+        <h2>21 个培养单位的招生条数</h2>
+        <p class="note">条数反映项目厚度，<b>不等于招生人数</b>——金融学院 6 条覆盖 494 人，而体育经济与管理学院 1 条仅 5 人。</p>
+        <div id="chDept"></div>
       </div>
 
       <div class="grid2">
         <div class="panel">
-          <h2>2027 年招生规模</h2>
-          <div id="chPlan"></div>
+          <h2>2025 年录取规模 Top 12</h2>
+          <p class="note">47 条档案有录取数，合计 <b>2296 人</b>。其余 19 条为目录调整或新设项目，未找到同名对应。</p>
+          <div id="chTopAdmit"></div>
         </div>
         <div class="panel">
-          <h2>学费（元 / 年）</h2>
+          <h2>招生规模与学费</h2>
+          <div id="chPlan"></div>
+          <div style="height:8px"></div>
           <div id="chFee"></div>
         </div>
+      </div>
+
+      <div class="panel">
+        <h2>66 条全清单（● 2027 招生目录）</h2>
+        <p class="note">按培养单位、学位类型筛选。<b>「仅推免」标注的项目统考生报不了。</b></p>
+        <div id="gradFilter" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"></div>
+        <div class="scroll" style="max-height:560px;overflow-y:auto"><table class="tb" id="gradAllTb"></table></div>
+      </div>
+
+      <div class="take">
+        <h3>推免专属通道</h3>
+        <p id="exclusiveNote"></p>
       </div>
     </section>
 
@@ -240,12 +255,12 @@
       <div class="head">
         <div class="eb">Job Threshold</div>
         <h1>岗位门槛：本科能进哪一层，硕士卡在哪一层</h1>
-        <p>十个岗位族的本科可报比例与起薪区间。这张表解释了「本科就业的天花板在哪里」。</p>
+        <p>19 个岗位族的本科可报比例与起薪区间，覆盖财经核心、泛商科、公共部门三类去向。这张表解释了「本科就业的天花板在哪里」。</p>
       </div>
 
       <div class="panel">
         <h2>本科可报比例（■ 模型推演，看相对差异）</h2>
-        <p class="note">条形＝该岗位族中对本科开放的岗位占比；右侧＝起薪区间（万元/年）。</p>
+        <p class="note">条形＝该岗位族中对本科开放的岗位占比；右侧＝起薪区间（万元/年）。<b>按三类归类：财经核心 9 个 / 泛商科 6 个 / 公共部门 4 个，共 19 个岗位族。</b></p>
         <div id="chFamilies"></div>
         <p class="note" style="margin-top:12px;color:#a8611b">
           <b>注意：</b>这一页的比例与起薪来自岗位结构池参数（292 条结构扩展池），
@@ -266,12 +281,12 @@
       </div>
     </section>
 
-    <!-- ===== 07 三条路径 ===== -->
+    <!-- ===== 07 八条路径 ===== -->
     <section class="view" id="v-routes">
       <div class="head">
         <div class="eb">Three Routes</div>
-        <h1>三条完整路径：从本科专业推到具体岗位</h1>
-        <p>每条线都能从大一推到大四，再推到第一份工作的时间点。这是把前面所有数据接起来的方式。</p>
+        <h1>八条完整路径：从本科专业推到具体岗位</h1>
+        <p>金融、会计审计、学术、财税、统计、保险、国贸、计算机——八条线，每条都能从大一推到大四，再推到第一份工作的时间点。</p>
       </div>
       <div id="pathsBox"></div>
 
@@ -281,8 +296,8 @@
       </div>
 
       <div class="take">
-        <h3>三条线的分岔点在同一个学期</h3>
-        <p>线一靠「保研排名或考研初试 + 实习」，线二靠「CPA + 四大寒假实习」，线三靠「助研 + 数理训练 + 保研」。
+        <h3>八条线的分岔点都在同一个学期</h3>
+        <p>金融靠「保研排名或考研初试 + 实习」，会计靠「CPA + 四大寒假实习」，学术靠「助研 + 数理训练 + 保研」，财税靠「税法 + 税务师」，统计靠「Python/SQL + 建模竞赛」，计算机靠「408 或 Python + 项目经历」。
            三者的关键动作都压在大三下到大四上。<b>所以真正的选择不是大四做的，是大二下就开始的。</b></p>
       </div>
     </section>
